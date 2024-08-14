@@ -1,0 +1,2 @@
+django>=5.1.0,<6.0.0    # 5.1.0 이상 6.0.0 미만
+djangorestframework>3.14.0,<4.0.0

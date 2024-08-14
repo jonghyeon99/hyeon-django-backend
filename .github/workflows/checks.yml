@@ -1,0 +1,23 @@
+name: Checks  # Workflow 이름
+
+on: [push]  # trigger
+
+jobs: # 실행 workflow management
+  test-lint:
+    name: Test and Lint
+    runs-on: ubuntu-20.04 작업 환경
+    steps:  # 작업 환경
+      # 도커 연결 작업
+      - name: Login in to Docker hub
+        uses: docker/login-actions@v1 # Actions에서 docker container로 접근하기 위한 패키지 설치
+        with:
+          username: ${{ secrets.DOCKERHUB_USER}}
+          password: ${{ secrets.DOCKERHUB_TOKEN}}
+      - name: Checkout  # 깃헙 레포에 있는 코드를 작업 환경으로 가져오는 역할
+        uses: actions/checkout@v2
+      - name: Test  # 테스트 코드 실행
+        run: docker-compose run --rm app sh -c "python manage.py test"
+      - name: Lint(Flake8)  # pep8 파이썬 코드 스타일 가이드 준수 여부 검사
+        run: docker-compose run --rm app sh -c "flake8"
+# jenkins
+# github actions => 설치 필요 X (무료)
