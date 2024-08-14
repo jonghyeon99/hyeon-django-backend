@@ -9,7 +9,7 @@ jobs: # 실행 workflow management
     steps:  # 작업 환경
       # 도커 연결 작업
       - name: Login in to Docker hub
-        uses: docker/login-actions@v1 # Actions에서 docker container로 접근하기 위한 패키지 설치
+        uses: docker/login-action@v1 # Actions에서 docker container로 접근하기 위한 패키지 설치
         with:
           username: ${{ secrets.DOCKERHUB_USER }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
